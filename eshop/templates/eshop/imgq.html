@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    {% comment %} <style>
+        .upload-btn-wrapper {
+          position: relative;
+          overflow: hidden;
+          display: inline-block;
+        }
+        
+        .btn {
+          border: 2px solid gray;
+          color: gray;
+          background-color: white;
+          padding: 8px 20px;
+          border-radius: 8px;
+          font-size: 20px;
+          font-weight: bold;
+        }
+        
+        .upload-btn-wrapper input[type=file] {
+          font-size: 100px;
+          position: absolute;
+          left: 0;
+          top: 0;
+          opacity: 0;
+        }
+    
+    </style> {% endcomment %}
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">Your Brand</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <!-- Add your other navbar items here -->
+        </ul>
+        <form class="form-inline my-2 my-lg-0" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="input-group">
+                <div class="custom-file">
+                    <input type="file" class="custom-file-input" id="inputGroupFile" name="query_image" accept="image/*">
+                    <label class="custom-file-label" for="inputGroupFile">Choose file</label>
+                </div>
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" type="submit"><i class="fas fa-search"></i></button>
+                </div>
+            </div>
+        </form>
+    </div>
+    {% comment %} <form method="post">
+        <div class="upload-btn-wrapper">
+          <button class="btn">Upload a file</button>
+          <input type="file" name="myfile" /> 
+
+          <input type="file" class="custom-file-input" id="inputGroupFile" name="query_image" accept="image/*">
+          <button class="btn" type="submit"></button>
+
+        </div>
+      </form> {% endcomment %}
+</nav>
+
+<div class="container">
+    <!-- Your content goes here -->
+</div>
+
+<!-- Bootstrap JS and dependencies (optional, only if you need JavaScript functionalities) -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

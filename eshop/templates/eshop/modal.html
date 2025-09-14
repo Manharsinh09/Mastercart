@@ -1,0 +1,51 @@
+{% extends "eshop/base.html" %}
+{% block bodycontant %}
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link href='http://fonts.googleapis.com/css?family=PT+Sans:400,700' rel='stylesheet' type='text/css'>
+    {% load static %}
+	<!-- <link rel="stylesheet" href="css/reset.css"> CSS reset -->
+	<!-- Resource style -->
+    <link rel="stylesheet" href="{% static 'eshop/css/style.css' %}" type="text/css">
+
+	 <!-- Modernizr -->
+  	
+	<title>Product Quick View | CodyHouse</title>
+</head>
+<body>
+	<header>
+		<h1>Product Quick View</h1>
+	</header>
+	
+	<li class="cd-item">
+		<img src="img/item-1.jpg" alt="Item Preview">
+		<a href="#0" class="cd-trigger">Quick View</a>
+	</li> <!-- cd-item -->
+
+
+	<div class="cd-quick-view">
+		<div class="cd-slider-wrapper">
+			<ul class="cd-slider">
+				<li style="list-style: none;" class="selected"><img src="img/item-1.jpg" alt="Product 1"></li>
+			</ul> 
+		</div> <!-- cd-slider-wrapper -->
+
+		<div class="cd-item-info">
+			<h2>Produt Title</h2>
+			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officia, omnis illo iste ratione. Numquam eveniet quo, ullam itaque expedita impedit. Eveniet, asperiores amet iste repellendus similique reiciendis, maxime laborum praesentium.</p>
+			<ul class="cd-item-action">
+				<li><button class="add-to-cart">Add to cart</button></li>							
+			</ul> 
+		</div> 
+		<a href="#0" class="cd-close">Close</a>
+	</div> <!-- cd-quick-view -->
+	
+<script src="{% static 'eshop/js/modernizr.js' %}"></script>
+<script src="{% static 'eshop/js/jquery-2.1.1.js' %}"></script>
+<script src="{% static 'eshop/js/velocity.min.js' %}"></script>
+<script src="{% static 'eshop/js/main.js' %}"></script>
+</body>
+</html>
+{% endblock bodycontant %}  

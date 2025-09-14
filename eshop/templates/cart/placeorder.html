@@ -1,0 +1,442 @@
+{% extends "eshop/base.html" %}
+
+{% block bodycontant %}
+{% load cart_tag %}
+
+    <div class="breadcrumb-option">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="breadcrumb__links">
+                        <a href="./index.html"><i class="fa fa-home"></i> Home</a>
+                        <span>Shopping cart</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <section class="shop-cart spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="shop__cart__table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Product</th>
+                                    <th>Price</th>
+                                    <th>Quantity</th>
+                                    <th>Total</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                {% for key,value in request.session.cart.items %}
+
+                                <tr>
+                                    <td class="cart__product__item">
+                                        <img style="max-width: 100px;" src="{{value.image}}" alt="">
+                                        <div class="cart__product__item__title">
+                                            <h6>{{value.name}}</h6>
+                                            <div class="rating">
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="cart__price">{{value.price}}</td>
+                                    <td class="cart__quantity">
+                                        <div class="pro-qty">
+                                            <a href="{% url 'item_decrement' value.product_id %}"><span>-</span></a>
+
+                                            <input type="text" value=" {{value.quantity}}">
+                                            <a href="{% url 'item_increment' value.product_id %}"><span>+</span></a>
+
+                                        </div>
+                                    </td>
+                                    <td class="cart__total"> {{ value.price|multiply:value.quantity }}</td>
+                                    <td class="cart__close"><a href="{% url 'item_clear' key %}"><span class="icon_close"></span></a></td>
+                                </tr>
+                                {% endfor %}
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <div class="cart__btn">
+                        <a style="cursor: pointer; background-color: rgb(57, 76, 255); color: white;" id="rzp-button1">Continue Shopping</a>
+                    </div>
+                </div> 
+            </div>
+           
+        </div>
+    </section>
+     <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    <script>
+    var options = {
+        "key": "rzp_test_3TxSzCaPGpyuY0", // Enter the Key ID generated from the Dashboard
+        "amount": "50000", // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+        "currency": "INR",
+        "name": "Acme Corp",
+        "description": "Test Transaction",
+        "image": "https://example.com/your_logo",
+        "order_id": "{{order_id}}", //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+        "callback_url": "http://127.0.0.1:8000/eshop/cart/success",
+        "prefill": {
+            "name": "Gaurav Kumar",
+            "email": "gaurav.kumar@example.com",
+            "contact": "9000090000"
+        },
+        "notes": {
+            "address": "Razorpay Corporate Office"
+        },
+        "theme": {
+            "color": "#3399cc"
+        }
+    };
+    var rzp1 = new Razorpay(options);
+    document.getElementById('rzp-button1').onclick = function(e){
+        rzp1.open();
+        e.preventDefault();
+    }
+    </script>
+
+{% endblock bodycontant %}
+
+
+<body>
+    <!-- Page Preloder -->
+    {% comment %} <div id="preloder">
+        <div class="loader"></div>
+    </div> {% endcomment %}
+
+    <!-- Offcanvas Menu Begin -->
+    <div class="offcanvas-menu-overlay"></div>
+    <div class="offcanvas-menu-wrapper">
+        <div class="offcanvas__close">+</div>
+        <ul class="offcanvas__widget">
+            <li><span class="icon_search search-switch"></span></li>
+            <li><a href="#"><span class="icon_heart_alt"></span>
+                <div class="tip">2</div>
+            </a></li>
+            <li><a href="#"><span class="icon_bag_alt"></span>
+                <div class="tip">2</div>
+            </a></li>
+        </ul>
+        <div class="offcanvas__logo">
+            <a href="./index.html"><img src="img/logo.png" alt=""></a>
+        </div>
+        <div id="mobile-menu-wrap"></div>
+        <div class="offcanvas__auth">
+            <a href="#">Login</a>
+            <a href="#">Register</a>
+        </div>
+    </div>
+    <!-- Offcanvas Menu End -->
+
+    <!-- Header Section Begin -->
+    <header class="header">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-xl-3 col-lg-2">
+                    <div class="header__logo">
+                        <a href="./index.html"><img src="img/logo.png" alt=""></a>
+                    </div>
+                </div>
+                <div class="col-xl-6 col-lg-7">
+                    <nav class="header__menu">
+                        <ul>
+                            <li class="active"><a href="./index.html">Home</a></li>
+                            <li><a href="#">Women’s</a></li>
+                            <li><a href="#">Men’s</a></li>
+                            <li><a href="/shop/shop">Shop</a></li>
+                            <li><a href="#">Pages</a>
+                                <ul class="dropdown">
+                                    <li><a href="./product-details.html">Product Details</a></li>
+                                    <li><a href="./shop-cart.html">Shop Cart</a></li>
+                                    <li><a href="./checkout.html">Checkout</a></li>
+                                    <li><a href="./blog-details.html">Blog Details</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="./blog.html">Blog</a></li>
+                            <li><a href="./contact.html">Contact</a></li>
+                        </ul>
+                    </nav>
+                </div>
+                <div class="col-lg-3">
+                    <div class="header__right">
+                        <div class="header__right__auth">
+                            {% if user.is_authenticated %}
+                            <a href=" {% url "userlogout" %} ">Logout</a>
+                            {% else %}
+                            <a href=" {% url "userlogin" %}">Login</a>
+                            {% endif %}
+                        </div>
+                        <ul class="header__right__widget">
+                            <li><span class="icon_search search-switch"></span></li>
+                            <li><a href="#"><span class="icon_heart_alt"></span>
+                                <div class="tip">2</div>
+                            </a></li>
+                            <li><a href="#"><span class="icon_bag_alt"></span>
+                                <div class="tip">{{request.session.cart|length}}</div>
+                            </a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="canvas__open">
+                <i class="fa fa-bars"></i>
+            </div>
+        </div>
+    </header>
+    <!-- Header Section End -->
+
+    <!-- Breadcrumb Begin -->
+    <div class="breadcrumb-option">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="breadcrumb__links">
+                        <a href="./index.html"><i class="fa fa-home"></i> Home</a>
+                        <span>Shopping cart</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Breadcrumb End -->
+
+    <!-- Shop Cart Section Begin -->
+    <section class="shop-cart spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="shop__cart__table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Product</th>
+                                    <th>Price</th>
+                                    <th>Quantity</th>
+                                    <th>Total</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                {% for key,value in request.session.cart.items %}
+
+                                <tr>
+                                    <td class="cart__product__item">
+                                        <img style="max-width: 100px;" src="{{value.image}}" alt="">
+                                        <div class="cart__product__item__title">
+                                            <h6>{{value.name}}</h6>
+                                            <div class="rating">
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="cart__price">{{value.price}}</td>
+                                    <td class="cart__quantity">
+                                        <div class="pro-qty">
+                                            <a href="{% url 'item_decrement' value.product_id %}"><span>-</span></a>
+
+                                            <input type="text" value=" {{value.quantity}}">
+                                            <a href="{% url 'item_increment' value.product_id %}"><span>+</span></a>
+
+                                        </div>
+                                    </td>
+                                    <td class="cart__total"> {{ value.price|multiply:value.quantity }}</td>
+                                    <td class="cart__close"><a href="{% url 'item_clear' key %}"><span class="icon_close"></span></a></td>
+                                </tr>
+                                {% endfor %}
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <div class="cart__btn">
+                        <a id="rzp-button1">Continue Shopping</a>
+                    </div>
+                </div> 
+            </div>
+           
+        </div>
+    </section>
+    <!-- Shop Cart Section End -->
+
+    <!-- Instagram Begin -->
+    <div class="instagram">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-2 col-md-4 col-sm-4 p-0">
+                    <div class="instagram__item set-bg" data-setbg="img/instagram/insta-1.jpg">
+                        <div class="instagram__text">
+                            <i class="fa fa-instagram"></i>
+                            <a href="#">@ MasterCart_shop</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-4 col-sm-4 p-0">
+                    <div class="instagram__item set-bg" data-setbg="img/instagram/insta-2.jpg">
+                        <div class="instagram__text">
+                            <i class="fa fa-instagram"></i>
+                            <a href="#">@ MasterCart_shop</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-4 col-sm-4 p-0">
+                    <div class="instagram__item set-bg" data-setbg="img/instagram/insta-3.jpg">
+                        <div class="instagram__text">
+                            <i class="fa fa-instagram"></i>
+                            <a href="#">@ MasterCart_shop</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-4 col-sm-4 p-0">
+                    <div class="instagram__item set-bg" data-setbg="img/instagram/insta-4.jpg">
+                        <div class="instagram__text">
+                            <i class="fa fa-instagram"></i>
+                            <a href="#">@ MasterCart_shop</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-4 col-sm-4 p-0">
+                    <div class="instagram__item set-bg" data-setbg="img/instagram/insta-5.jpg">
+                        <div class="instagram__text">
+                            <i class="fa fa-instagram"></i>
+                            <a href="#">@ MasterCart_shop</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-4 col-sm-4 p-0">
+                    <div class="instagram__item set-bg" data-setbg="img/instagram/insta-6.jpg">
+                        <div class="instagram__text">
+                            <i class="fa fa-instagram"></i>
+                            <a href="#">@ MasterCart_shop</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Instagram End -->
+
+    <!-- Footer Section Begin -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-6 col-sm-7">
+                    <div class="footer__about">
+                        <div class="footer__logo">
+                            <a href="./index.html"><img src="img/logo.png" alt=""></a>
+                        </div>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
+                        cilisis.</p>
+                        <div class="footer__payment">
+                            <a href="#"><img src="img/payment/payment-1.png" alt=""></a>
+                            <a href="#"><img src="img/payment/payment-2.png" alt=""></a>
+                            <a href="#"><img src="img/payment/payment-3.png" alt=""></a>
+                            <a href="#"><img src="img/payment/payment-4.png" alt=""></a>
+                            <a href="#"><img src="img/payment/payment-5.png" alt=""></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-3 col-sm-5">
+                    <div class="footer__widget">
+                        <h6>Quick links</h6>
+                        <ul>
+                            <li><a href="#">About</a></li>
+                            <li><a href="#">Blogs</a></li>
+                            <li><a href="#">Contact</a></li>
+                            <li><a href="#">FAQ</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-3 col-sm-4">
+                    <div class="footer__widget">
+                        <h6>Account</h6>
+                        <ul>
+                            <li><a href="#">My Account</a></li>
+                            <li><a href="#">Orders Tracking</a></li>
+                            <li><a href="#">Checkout</a></li>
+                            <li><a href="#">Wishlist</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-8 col-sm-8">
+                    <div class="footer__newslatter">
+                        <h6>NEWSLETTER</h6>
+                        <form action="#">
+                            <input type="text" placeholder="Email">
+                            <button type="submit" class="site-btn">Subscribe</button>
+                        </form>
+                        <div class="footer__social">
+                            <a href="#"><i class="fa fa-facebook"></i></a>
+                            <a href="#"><i class="fa fa-twitter"></i></a>
+                            <a href="#"><i class="fa fa-youtube-play"></i></a>
+                            <a href="#"><i class="fa fa-instagram"></i></a>
+                            <a href="#"><i class="fa fa-pinterest"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                    <div class="footer__copyright__text">
+                        <p>Copyright &copy; <script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a></p>
+                    </div>
+                    <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- Footer Section End -->
+
+
+    {% comment %} <button id="rzp-button1">Pay with Razorpay</button> {% endcomment %}
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    <script>
+    var options = {
+        "key": "rzp_test_3TxSzCaPGpyuY0", // Enter the Key ID generated from the Dashboard
+        "amount": "50000", // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+        "currency": "INR",
+        "name": "Acme Corp",
+        "description": "Test Transaction",
+        "image": "https://example.com/your_logo",
+        "order_id": "{{order_id}}", //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+        "callback_url": "http://127.0.0.1:8000/eshop/cart/success",
+        "prefill": {
+            "name": "Gaurav Kumar",
+            "email": "gaurav.kumar@example.com",
+            "contact": "9000090000"
+        },
+        "notes": {
+            "address": "Razorpay Corporate Office"
+        },
+        "theme": {
+            "color": "#3399cc"
+        }
+    };
+    var rzp1 = new Razorpay(options);
+    document.getElementById('rzp-button1').onclick = function(e){
+        rzp1.open();
+        e.preventDefault();
+    }
+    </script>
+  

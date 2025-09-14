@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Error {{ status_code }} | Something went wrong</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f7f9fc;
+            color: #333;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .error-container {
+            max-width: 600px;
+            background: #fff;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .error-code {
+            font-size: 100px;
+            font-weight: bold;
+            color: #2e86de;
+        }
+
+        .error-message {
+            font-size: 24px;
+            margin: 20px 0;
+        }
+
+        .error-description {
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 30px;
+        }
+
+        .home-button {
+            display: inline-block;
+            padding: 12px 25px;
+            background: #2e86de;
+            color: white;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+
+        .home-button:hover {
+            background: #1b4f72;
+        }
+    </style>
+</head>
+<body>
+    <div class="error-container">
+        <div class="error-code">{{ status_code }}</div>
+        <div class="error-message">
+            {% if status_code == 404 %}
+                Page Not Found
+            {% elif status_code == 500 %}
+                Internal Server Error
+            {% elif status_code == 403 %}
+                Permission Denied
+            {% elif status_code == 400 %}
+                Bad Request
+            {% else %}
+                Something Went Wrong
+            {% endif %}
+        </div>
+        <div class="error-description">
+            Sorry, the page you're looking for doesn’t exist or an unexpected error has occurred.
+        </div>
+        <a href="/" class="home-button">Go Home</a>
+    </div>
+</body>
+</html>

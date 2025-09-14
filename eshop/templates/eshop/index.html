@@ -1,0 +1,148 @@
+
+{% extends "eshop/base.html" %}
+{% load static %}
+    <!-- Header Section End -->
+{% block bodycontant %}
+    <!-- Categories Section Begin -->
+    <section class="categories">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-6 p-0">
+                    <div Style="object-fit: cover;" class="categories__item categories__large__item set-bg"
+                    data-setbg="{% static 'eshop/images/back2.jpg' %}">
+                    <div class="categories__text" style="background-color: #a3a3a36b; padding: 20px; border-radius: 10px;">
+                        <h1>Sale is Live</h1>
+                        <p Style="color: white; font-weight: 700;">Sitamet, consectetur adipiscing elit, sed do eiusmod tempor incidid-unt labore
+                        edolore magna aliquapendisse ultrices gravida.</p>
+                        <a style="cursor: pointer;" href="/eshop/shop/">Shop now</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 col-sm-6 p-0">
+                        <div class="categories__item set-bg" data-setbg="{% static 'eshop/images/sub1.jpg' %}">
+                            <div class="categories__text">
+                                <h4>Electronics</h4>
+                                <p>358 items</p>
+                                <a style="cursor: pointer;" href="/eshop/shop/?catagory=1">Shop now</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6 p-0">
+                        <div class="categories__item set-bg" data-setbg="{% static 'eshop/images/back1.jpg' %}">
+                            <div class="categories__text">
+                                <h4>Mobiles</h4>
+                                <p>273 items</p>
+                                <a style="cursor: pointer;" href="/eshop/shop/?catagory=1">Shop now</a>     
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6 p-0">
+                        <div class="categories__item set-bg" data-setbg="{% static 'eshop/images/sub3.jpg' %}">
+                            <div class="categories__text">
+                                <h4>Men's Fastions</h4>
+                                <p>159 items</p>
+                                
+                                <a style="cursor: pointer;" href="/eshop/shop/?catagory=2">Shop now</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6 p-0">
+                        <div class="categories__item set-bg" data-setbg="{% static 'eshop/images/sub4.jpg' %}">
+                            <div class="categories__text">
+                                <h4>Women's fashions</h4>
+                                <p>792 items</p>                                
+                                <a style="cursor: pointer;" href="/eshop/shop/?catagory=3">Shop now</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Categories Section End -->
+
+<!-- Product Section Begin -->
+
+<!-- Product Section End -->
+
+<!-- Banner Section Begin -->
+<section class="banner set-bg" data-setbg="{% static 'eshop/images/banner-1.jpg' %}">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-7 col-lg-8 m-auto">
+                <div class="banner__slider owl-carousel">
+                    <div class="banner__item">
+                        <div class="banner__text">
+                            <span>The Chloe Collection</span>
+                            <h1>The Project Jacket</h1>
+                            <a href="#">Shop now</a>
+                        </div>
+                    </div>
+                    <div class="banner__item">
+                        <div class="banner__text">
+                            <span>The Chloe Collection</span>
+                            <h1>The Project Jacket</h1>
+                            <a href="#">Shop now</a>
+                        </div>
+                    </div>
+                    <div class="banner__item">
+                        <div class="banner__text">
+                            <span>The Chloe Collection</span>
+                            <h1>The Project Jacket</h1>
+                            <a href="#">Shop now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Banner Section End -->
+
+
+
+<!-- Services Section Begin -->
+<section class="services spad mt-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 col-md-4 col-sm-6">
+                <div class="services__item">
+                    <i class="fa fa-car"></i>
+                    <h6>Free Shipping</h6>
+                    <p>For all oder over $99</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-6">
+                <div class="services__item">
+                    <i class="fa fa-money"></i>
+                    <h6>Money Back Guarantee</h6>
+                    <p>If good have Problems</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-6">
+                <div class="services__item">
+                    <i class="fa fa-support"></i>
+                    <h6>Online Support 24/7</h6>
+                    <p>Dedicated support</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-6">
+                <div class="services__item">
+                    <i class="fa fa-headphones"></i>
+                    <h6>Payment Secure</h6>
+                    <p>100% secure payment</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Services Section End -->
+
+
+
+{% endblock bodycontant %}
+
+
